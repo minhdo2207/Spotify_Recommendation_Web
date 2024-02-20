@@ -1,10 +1,9 @@
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import './App.css';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Fragment } from 'react';
-import Header from './components/Header/Header';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Detail from './pages/detail/Detail';
+import RootLayout from './pages/layout/Layout';
 
 const darkTheme = createTheme({
   palette: {
@@ -15,11 +14,11 @@ const darkTheme = createTheme({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home/>
-  },
-  {
-    path: '/detail',
-    element: <Detail/>
+    element: <RootLayout/>,
+    children: [
+      { path: '/', element: <Home/> },
+      { path: '/detail', element: <Detail/> },
+    ]
   }
 ])
 
@@ -28,10 +27,6 @@ function App() {
     <RouterProvider router={router}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline/>
-        <Fragment>
-          <Header/>
-          <Outlet/>
-        </Fragment>
       </ThemeProvider>
     </RouterProvider>
   );

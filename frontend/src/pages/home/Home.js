@@ -4,7 +4,8 @@ import './Home.css';
 export default function Home(){
     return (
         <div>
-            Home page
+            Home page 1
+            <button className="btn btn-success">Ok</button>
         </div>
     )
 }

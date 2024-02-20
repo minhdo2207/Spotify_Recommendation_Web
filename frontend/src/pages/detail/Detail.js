@@ -4,7 +4,7 @@ import './Detail.css';
 export default function Detail(){
     return (
         <div>
-            Detail page
+            Detail page 1
         </div>
     )
 }

@@ -14,3 +14,15 @@
   background: #efefef;
   text-align: center;
 }
+
+.popular-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.newsong-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+}

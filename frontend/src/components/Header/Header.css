@@ -23,6 +23,7 @@
     margin-left: 4rem;
     cursor: pointer;
     transition: all ease-in-out .3s;
+    background-color: var(--theme-color);
 }
 .menu-item-text:hover{
     color: var(--primary-color);

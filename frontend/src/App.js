@@ -7,6 +7,7 @@ import RootLayout from './pages/layout/Layout';
 import { NotFound } from './pages/notfound/NotFound';
 import Upcoming from './pages/upcoming/Upcoming';
 import TopRated from './pages/top-rated/TopRated';
+import Recommend from './pages/recommend/Recommend';
 
 const darkTheme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/detail', element: <Detail/> },
       { path: '/upcoming', element: <Upcoming/>},
       { path: '/top-rated', element: <TopRated/>},
+      { path: '/recommend', element: <Recommend/>},
       { path: '*', element: <NotFound/>}
     ]
   }

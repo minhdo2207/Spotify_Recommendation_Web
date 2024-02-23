@@ -1,9 +1,17 @@
 import React from "react";
 import "./CardHBox.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CardHBox(props) {
+
+  const navigate = useNavigate();
+
+  function handleShowDetail(id){
+    navigate(`/detail?id=${id}`);
+  }
+
   return (
-    <div className="card-hbox">
+    <div className="card-hbox" onClick={() => handleShowDetail('123')}>
       <div className="each-img each-img-newsong">
         <div style={{ backgroundImage: `url(${props.img})` }}>
           {/* <span>Slide 1</span> */}

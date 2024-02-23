@@ -1,9 +1,17 @@
 import React from "react";
 import "./CardVbox.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CardVBox(props) {
+
+  const navigate = useNavigate();
+
+  function handleClickItem(id){
+    navigate(`/detail?id=${id}`)
+  }
+
   return (
-    <div className="card-vbox">
+    <div onClick={() => handleClickItem('123')} className="card-vbox">
       <div className="each-img">
         <div style={{ backgroundImage: `url(${props.img})` }}>
           {/* <span>Slide 1</span> */}

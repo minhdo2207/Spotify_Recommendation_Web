@@ -29,11 +29,25 @@
 }
 
 .drop-section{
-    position: relative;
+    position: fixed;
     right: 0;
     display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
     align-items: center;
     justify-content: center;
     width: 45%;
     height: calc(100vh - 65px);
+}
+
+.song-dropped{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.drop-section .btn-primary {
+    position: fixed;
+    bottom: 3rem;
+    right: 8rem;
 }

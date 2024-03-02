@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import './DragDrop.css';
-import CardVBox from "../../components/CardVbox/CardVBox";
+import { useDrop } from "react-dnd";
+import Card from "../../components/Card/Card";
 
 export default function DragDrop(){
 
@@ -8,33 +9,66 @@ export default function DragDrop(){
     const name = "Blinding Lights";
     const singer = "The Weeknd";
 
-    return (
-        <div style={{display: 'flex'}}>
-            <div className="drag-section">
-                <h1 style={{color: 'var(--gray-color)'}} className="mt-4 mb-4">Select song which you like</h1>
-                <div className="list-song">
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                    <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                </div>
-            </div>
+    const [board, setBoard] = useState([]);
 
-            <div className="drop-section">
-                <div style={{textAlign: 'center'}}>
-                    <button className="add-song mb-4">+</button>
-                    <h1 style={{color: 'var(--gray-color)'}}>Drop the song which you like</h1>
-                </div>
-            </div>
+    const [{isOver}, drop] = useDrop(() => ({
+        accept: "item",
+        drop: (item) => addItemToBoard(item),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        })
+    }))
+
+    function addItemToBoard(data) {
+        // console.log(data);
+        setBoard((board) => [...board, data])
+    }
+
+    return (
+      <div style={{ display: "flex" }}>
+        <div className="drag-section">
+          <h1 style={{ color: "var(--gray-color)" }} className="mt-4 mb-4">
+            Select song which you like
+          </h1>
+          <div className="list-song">
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+            <Card img={img} name={name} singer={singer}></Card>
+          </div>
         </div>
-    )
+
+        <div className="drop-section" ref={drop}>
+          <div style={{ textAlign: "center" }}>
+            {(board.length === 0) && (
+              <div>
+                <button className="add-song mb-4">+</button>
+                <h1 style={{ color: "var(--gray-color)" }}>
+                  Drop the song which you like
+                </h1>
+              </div>
+            )}
+            <div className="song-dropped">
+                {
+                    board.map((item, index) => (
+                        <div key={index}>
+                            <Card img={item.img} name={item.name} singer={item.singer}></Card>
+                        </div>
+                    ))
+                }
+            </div>
+          </div>
+          <button className="btn-primary">Select</button>
+        </div>
+      </div>
+    );
 }

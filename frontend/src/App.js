@@ -8,6 +8,9 @@ import { NotFound } from './pages/notfound/NotFound';
 import Upcoming from './pages/upcoming/Upcoming';
 import TopRated from './pages/top-rated/TopRated';
 import Recommend from './pages/recommend/Recommend';
+import DragDrop from './pages/draganddrop/DragDrop';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const darkTheme = createTheme({
   palette: {
@@ -25,6 +28,7 @@ const router = createBrowserRouter([
       { path: '/upcoming', element: <Upcoming/>},
       { path: '/top-rated', element: <TopRated/>},
       { path: '/recommend', element: <Recommend/>},
+      { path: '/select-song', element: <DragDrop/>},
       { path: '*', element: <NotFound/>}
     ]
   }
@@ -33,9 +37,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <RouterProvider router={router}>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline/>
-      </ThemeProvider>
+      <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline/>
+        </ThemeProvider>
+      </DndProvider>
     </RouterProvider>
   );
 }

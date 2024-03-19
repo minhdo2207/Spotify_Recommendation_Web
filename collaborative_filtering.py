@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import math
@@ -11,13 +10,12 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-df = pd.read_csv('./user_ratings.csv')
-songs_df = pd.read_csv('./pop_songs.csv', usecols=['id', 'name', 'cover_url'])
+df = pd.read_csv('./data/user_ratings.csv')
+songs_df = pd.read_csv('./data/pop_songs.csv', usecols=['id', 'name', 'cover_url'])
 
 
 def get_song_url(song_id):
     return songs_df[songs_df.id == song_id].cover_url.values[0]
-
 
 def get_user_id(user_id_number):
     return df[df.user_id_number == user_id_number].user_id.values[0]

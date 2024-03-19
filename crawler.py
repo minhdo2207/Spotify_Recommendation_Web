@@ -66,9 +66,9 @@ data_generator = DataGenerator(spotify_api, 'pop')
 
 # Generate songs dataframe and save it to CSV
 songs_df = data_generator.generate_songs_dataframe()
-songs_df.to_csv('pop_songs.csv', index=False)
+songs_df.to_csv('./data/pop_songs.csv', index=False)
 
 # Generate user ratings dataframe and save it to CSV
 song_ids = songs_df['id'].tolist()
 user_ratings_df = data_generator.generate_user_ratings(100, song_ids)
-user_ratings_df.to_csv('user_ratings.csv', index=False)
+user_ratings_df.to_csv('./data/user_ratings.csv', index=False)

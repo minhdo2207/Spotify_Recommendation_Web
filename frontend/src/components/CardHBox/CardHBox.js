@@ -11,7 +11,7 @@ export default function CardHBox(props) {
   }
 
   return (
-    <div className="card-hbox" onClick={() => handleShowDetail('123')}>
+    <div className="card-hbox" onClick={() => handleShowDetail(props.id)}>
       <div className="each-img each-img-newsong">
         <div style={{ backgroundImage: `url(${props.img})` }}>
           {/* <span>Slide 1</span> */}

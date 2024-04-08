@@ -6,7 +6,7 @@ export default function Card(props) {
 
   const [{isDragging}, drag] = useDrag(() => ({
     type: 'item',
-    item: {name: props.name, img: props.img, singer: props.singer},
+    item: {name: props.name, img: props.img, singer: props.singer, id: props.id},
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     })

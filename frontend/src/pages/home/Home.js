@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './Home.css';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import CardVBox from "../../components/CardVbox/CardVBox";
 import CardHBox from "../../components/CardHBox/CardHBox";
+import { getKey } from "../../redux/apiRequest";
 
 export default function Home(){
+
+    const [listSong, setListSong] = useState([]);
+
+    const getNewSong = async () => {
+      if(!localStorage.getItem("token")){
+          await getKey();
+      }
+      //console.log(hds);
+      //console.log(localStorage.getItem("token"));
+     await axios.get(
+          'https://api.spotify.com/v1/browse/new-releases?limit=10&offset=5',
+          {
+              headers:{
+                  Authorization: 'Bearer ' + localStorage.getItem("token"),
+              }
+          }
+      )
+      .then(res => {
+          setListSong(res.data.albums.items);
+      })
+      .catch(err => console.log(err));
+  }
+
+    useEffect(() => {
+      getNewSong();
+    },[])
 
     const images = [
         "https://i.scdn.co/image/ab67616d0000b273aaabd35dde0cfc0bcf315d3e",
@@ -58,6 +86,10 @@ export default function Home(){
     const name = "Blinding Lights";
     const singer = "The Weeknd";
 
+    function check(){
+      console.log(listSong);
+    }
+
     return (
         <div>
             <div style={{marginTop: '3rem'}}>
@@ -81,33 +113,28 @@ export default function Home(){
             </div>
 
             <div>
-              <h1 className="mt-5 mb-4" style={{color: 'var(--gray-color)', fontSize: '30px'}}>Popular</h1>
+              <h1 onClick={check} className="mt-5 mb-4" style={{color: 'var(--gray-color)', fontSize: '30px'}}>New Album</h1>
               <div className="popular-content">
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={images[1]} name={name} singer={singer}></CardVBox>
-                <CardVBox img={images[2]} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
-                <CardVBox img={img} name={name} singer={singer}></CardVBox>
+                {
+                  listSong.map((item) => (
+                    <div key={item.id}>
+                      <CardVBox id={item.id} img={item.images[0].url} name={item.name} singer={item.artists[0].name}></CardVBox>
+                    </div>
+                  ))
+                }
               </div>
             </div>
 
             <div className="mb-5">
-              <h1 className="mt-5 mb-4" style={{color: 'var(--gray-color)', fontSize: '30px'}}>New song</h1>
+              <h1 className="mt-5 mb-4" style={{color: 'var(--gray-color)', fontSize: '30px'}}>New Album release</h1>
               <div className="newsong-content">
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={images[1]} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
-                <CardHBox img={img} name={name} singer={singer} type={'New song release'}></CardHBox>
+                {
+                  listSong.map((item) => (
+                    <div key={item.id}>
+                      <CardHBox id={item.id} img={item.images[0].url} name={item.name} singer={item.artists[0].name} type={'New song release'}></CardHBox>
+                    </div>
+                  ))
+                }
               </div>
             </div>
         </div>

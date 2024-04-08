@@ -7,7 +7,10 @@ const ListMenu = ["POPULAR", "TOP RATED", "UPCOMING", "RECOMMEND"];
 
 
 function AvatarUser() {
-  return <Avatar>User</Avatar>;
+  return <div style={{display: 'flex'}}>
+    <Avatar>User</Avatar>
+    <button style={{marginLeft: '10px'}} onClick={() => {localStorage.removeItem("userId"); alert("Logout successfully!"); window.location.reload()}} className="btn-primary roboto-regular">Logout</button>
+  </div>;
 }
 
 export default function Header() {

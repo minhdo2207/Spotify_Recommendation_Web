@@ -11,6 +11,8 @@ import Recommend from "./pages/recommend/Recommend";
 import DragDrop from "./pages/draganddrop/DragDrop";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useEffect } from "react";
+import { getKey } from "./redux/apiRequest";
 
 const darkTheme = createTheme({
   palette: {
@@ -35,6 +37,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  setInterval(() => {localStorage.removeItem("token"); getKey();}, 1800000)
   return (
     <DndProvider backend={HTML5Backend}>
       <RouterProvider router={router}>

@@ -3,7 +3,7 @@ import "./Header.css";
 import { Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const ListMenu = ["POPULAR", "TOP RATED", "UPCOMING", "RECOMMEND"];
+const ListMenu = ["POPULAR", "TOP RATED", "RECOMMEND"];
 
 
 function AvatarUser() {
@@ -37,10 +37,10 @@ export default function Header() {
         navigate("/top-rated");
         break;
       }
-      case "UPCOMING": {
-        navigate("/upcoming");
-        break;
-      }
+      // case "UPCOMING": {
+      //   navigate("/upcoming");
+      //   break;
+      // }
       case "RECOMMEND": {
         if(localStorage.getItem("userId")){
           navigate("/recommend");

@@ -6,6 +6,13 @@ export const envirments = {
 
 export const songData = [
     {
+        img: "https://i.scdn.co/image/ab67616d0000b273d5f1096f3ff81fe63d4d41a9",
+        name: "So Long",
+        singer: "Radiation City",
+        id: "2T1r3MMzaieZSUlawLolEn",
+        link: "https://open.spotify.com/track/2T1r3MMzaieZSUlawLolEn"
+    },
+    {
         img: "https://i.scdn.co/image/ab67616d00001e02ba994f10e0fc9accf5385ac7",
         name: "Go",
         singer: "Delilah",
@@ -151,5 +158,12 @@ export const songData = [
         singer: "夏婉安",
         id: "0HYLuyHb8D1UfGQkdcvQ4A",
         link: "https://open.spotify.com/track/0HYLuyHb8D1UfGQkdcvQ4A"
+    },
+    {
+        img: "https://i.scdn.co/image/ab67616d0000b273d7f0ddbf9a0ee5abaaa42bb0",
+        name: "Is It Over",
+        singer: "Elisabeth Andreassen",
+        id: "2MniOu4FcIZhoSN9ifdbEF",
+        link: "https://open.spotify.com/track/2MniOu4FcIZhoSN9ifdbEF"
     },
 ]

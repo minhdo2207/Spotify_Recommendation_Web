@@ -1,6 +1,7 @@
 import React from "react";
 import "./TopRated.css";
 import CardHBox from "../../components/CardHBox/CardHBox";
+import { songData } from "../../redux/envirments";
 
 export default function TopRated() {
   const data = {
@@ -40,15 +41,15 @@ export default function TopRated() {
       </div>
 
       <div className="btn-play">
-        <button className="btn-primary roboto-bold">Play song</button>
+        <button className="btn-primary roboto-bold" onClick={() => {window.open('https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b')}}>Play song</button>
       </div>
 
       <div className="other-song">
         {
-            list.map((item, index) => (
-                <div key={index} className="item-other">
+            songData.map((item, index) => (
+                (index <8)&&<div key={index} className="item-other">
                     <h1 style={{color: (index === 0 || index === 1) ? 'var(--primary-color)' : 'var(--white-color)'}}>{index+2}</h1>
-                    <CardHBox img={data.img} singer={data.singer} name={data.name} type={'Top song'}></CardHBox>
+                    <CardHBox img={item.img} singer={item.singer} name={item.name} type={'Top song'} id={item.id}></CardHBox>
                 </div>
             ))
         }

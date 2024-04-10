@@ -11,7 +11,7 @@ CORS(app)  # Enable CORS for all routes
 
 
 # Instantiate the content-based recommender object
-content_based_recommender = ContentBasedRecommender('../data/pop_songs.csv')
+content_based_recommender = ContentBasedRecommender('/projects/Spotify_Recommendation_Web/data/pop_songs.csv')
 
 @app.route('/api/content-base-recommend', methods=['POST'])
 def content_based_recommend_songs():
@@ -20,7 +20,7 @@ def content_based_recommend_songs():
         song_id = data.get('song_id')
 
         # Instantiate the content-based recommender object
-        content_based_recommender = ContentBasedRecommender('../data/pop_songs.csv')
+        content_based_recommender = ContentBasedRecommender('/projects/Spotify_Recommendation_Web/data/pop_songs.csv')
 
         # Get recommendations from the content-based recommender
         recommended_songs = content_based_recommender.get_recommendations(song_id)

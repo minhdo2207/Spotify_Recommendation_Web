@@ -10,8 +10,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-df = pd.read_csv('../data/user_ratings.csv')
-songs_df = pd.read_csv('../data/pop_songs.csv', usecols=['id', 'name', 'cover_url'])
+df = pd.read_csv('/projects/Spotify_Recommendation_Web/data/user_ratings.csv')
+songs_df = pd.read_csv('/projects/Spotify_Recommendation_Web/data/pop_songs.csv', usecols=['id', 'name', 'cover_url'])
 
 
 def get_song_url(song_id):

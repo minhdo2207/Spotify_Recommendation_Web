@@ -38,11 +38,36 @@ class DataGenerator:
         self.spotify_api = spotify_api
         self.genre = genre
 
-    def generate_songs_dataframe(self):
-        songs = self.spotify_api.get_all_songs(self.genre)
+    # def generate_songs_dataframe(self):
+    #     songs = self.spotify_api.get_all_songs(self.genre)
+    #     songs_df = pd.DataFrame(songs)
+    #     songs_df['cover_url'] = songs_df['id'].apply(self.spotify_api.get_cover_image)
+    #     return songs_df
+
+    def __init__(self, spotify_api, genre):
+        self.spotify_api = spotify_api
+        self.genre = genre
+
+    def generate_songs_dataframe(self, total_limit=1000):
+        songs = []
+        offset = 0
+        total_fetched = 0
+        while total_fetched < total_limit:
+            limit = min(50, total_limit - total_fetched)
+            track_results = self.spotify_api.get_all_songs(self.genre, limit_per_request=limit, total_limit=total_limit)
+            if not track_results:
+                break
+            songs.extend(track_results)
+            total_fetched += len(track_results)
+            offset += limit
         songs_df = pd.DataFrame(songs)
         songs_df['cover_url'] = songs_df['id'].apply(self.spotify_api.get_cover_image)
+        # Dropping duplicates based on 'id' column
+        songs_df.drop_duplicates(subset=['id'], inplace=True)
+        # Truncate dataframe to maintain the desired total limit
+        songs_df = songs_df.head(total_limit)
         return songs_df
+
 
     def generate_user_ratings(self, num_users, song_ids):
         user_ids = [''.join(random.choices(string.ascii_uppercase + string.digits, k=6)) for _ in range(num_users)]

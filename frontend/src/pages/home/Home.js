@@ -17,6 +17,7 @@ export default function Home(){
       }
       //console.log(hds);
       //console.log(localStorage.getItem("token"));
+      localStorage.removeItem("userId");
      await axios.get(
           'https://api.spotify.com/v1/browse/new-releases?limit=10&offset=5',
           {
